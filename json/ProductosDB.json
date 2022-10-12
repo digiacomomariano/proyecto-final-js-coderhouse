@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "codigo": 125,
+    "descripcion": "R6-R12 TRASERO ORIGINAL",
+    "categoria": "RENAULT",
+    "precio": 13.38
+  },
+  {
+    "id": 2,
+    "codigo": 126,
+    "descripcion": "R12 DELANTERO",
+    "categoria": "RENAULT",
+    "precio": 21.96
+  },
+  {
+    "id": 3,
+    "codigo": 127,
+    "descripcion": "R21 DELANTERO",
+    "categoria": "RENAULT",
+    "precio": 21.96
+  },
+  {
+    "id": 4,
+    "codigo": 203,
+    "descripcion": "TIRA 3 AGUJEROS D1500",
+    "categoria": "VW",
+    "precio": 24.82
+  },
+  {
+    "id": 5,
+    "codigo": 204,
+    "descripcion": "D1500 REFORMA",
+    "categoria": "VW",
+    "precio": 20.35
+  },
+  {
+    "id": 6,
+    "codigo": 205,
+    "descripcion": "GACEL",
+    "categoria": "VW",
+    "precio": 7.81
+  },
+  {
+    "id": 7,
+    "codigo": 356,
+    "descripcion": "FALCON CORTO",
+    "categoria": "FORD",
+    "precio": 20.68
+  },
+  {
+    "id": 8,
+    "codigo": 357,
+    "descripcion": "FALCON LARGO",
+    "categoria": "FORD",
+    "precio": 20.68
+  },
+  {
+    "id": 9,
+    "codigo": 358,
+    "descripcion": "SIERRA",
+    "categoria": "FORD",
+    "precio": 17.12
+  },
+  {
+    "id": 10,
+    "codigo": 430,
+    "descripcion": "COLUMNA 404 7mm",
+    "categoria": "PEUGEOT",
+    "precio": 44.79
+  },
+  {
+    "id": 11,
+    "codigo": 438,
+    "descripcion": "COLUMNA 504 8mm",
+    "categoria": "PEUGEOT",
+    "precio": 44.79
+  },
+  {
+    "id": 12,
+    "codigo": 429,
+    "descripcion": "504 ARO",
+    "categoria": "PEUGEOT",
+    "precio": 19.26
+  },
+  {
+    "id": 13,
+    "codigo": 525,
+    "descripcion": "125-1500 GANCHO CORTO",
+    "categoria": "FIAT",
+    "precio": 15.52
+  },
+  {
+    "id": 14,
+    "codigo": 579,
+    "descripcion": "128 GANCHO LARGO",
+    "categoria": "FIAT",
+    "precio": 16.51
+  },
+  {
+    "id": 15,
+    "codigo": 517,
+    "descripcion": "125-1500 TRASERO CORTO",
+    "categoria": "FIAT",
+    "precio": 12.38
+  }
+]

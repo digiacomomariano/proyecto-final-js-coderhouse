@@ -1,0 +1,185 @@
+/* ===== Google Font Import - Poppins ===== */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+:root {
+    /* ===== Colors ===== */
+    --color1: #43655a;
+    --color2: #628281;
+    --color3: #889fa5;
+    --color4: #B1BDC5;
+    --color5: #DADDE2; 
+    --panel-color: #fff;
+    --text-color: #000;
+    --black-light-color: #707070;
+    --border-color: #4D4C4C;
+
+    /* ====== Transition ====== */
+    --tran-05: all 0.5s ease;
+    --tran-03: all 0.3s ease;
+    --tran-03: all 0.2s ease;
+}
+
+ul{
+    padding: 0;
+}
+
+body{
+    min-height: 100vh;
+    background-color: var(--panel-color);
+}
+
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    padding: 10px 14px;
+    border-right: 1px solid var(--border-color);
+    background-color: var(--panel-color);
+    transition: var(--tran-05);
+}
+
+nav.cerrar{
+    width: 73px;
+}
+
+nav .contenedor-brand{
+    display: flex;
+    align-items: center;
+    transition: var(--tran-03);
+    cursor: pointer;
+}
+
+nav .contenedor-brand:hover{
+    transform: scale(0.9);
+}
+
+nav .logo-img{
+    display: flex;
+    justify-content: center;
+    min-width: 45px;
+}
+
+nav .logo-img img{
+    width: 40px;
+    object-fit: cover;
+}
+
+nav .contenedor-brand .brand{
+    font-size: 24px;
+    font-weight: 600;
+    margin-left: 14px;
+    color: var(--text-color);
+}
+
+nav.cerrar .logo_name{
+    opacity: 0;
+    pointer-events: none;
+}
+
+nav .menu-items{
+    margin-top: 40px;
+    height: calc(100% - 90px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+nav .menu-items li{
+    list-style: none;
+}
+
+nav .menu-items li a{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    text-decoration: none;
+    position: relative;
+    margin-left: 10px;
+}
+
+
+.items-links li a:hover:before{
+    content: "";
+    position: absolute;
+    left: -7px;
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background-color: var(--color1);  
+}
+
+.menu-items li a i{
+    font-size: 24px;
+    min-width: 45px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+}
+
+.menu-items li a .text-link{
+    margin-left: 15px;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-color);    
+    transition: var(--tran-05);
+}
+
+nav.cerrar li a .text-link{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.items-links li a:hover i,
+.items-links li a:hover .text-link{
+    color: var(--color1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.contenedor{
+    position: relative;
+    left: 250px;
+    background-color: var(--panel-color);
+    min-height: 100vh;
+    width: calc(100% - 250px);
+    transition: var(--tran-05);
+}
+
+.contenedor .navbar-top{
+    background-color: var(--panel-color);
+    align-items: center;
+    height: 50px;
+    box-shadow: 0px 2px 5px -6px black;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/530115b9ea.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Panel de Control</title>
+  </head>
+  <body>
+    <nav>
+      <!-- Comienza logo -->
+      <div class="contenedor-brand">
+        <div class="logo-img">
+          <img src="./img/logo.png" alt="LogoWeb" />
+        </div>
+        <span class="brand">DANIELBAM</span>
+      </div>
+      <!-- Finaliza Logo -->
+
+      <!-- Comienza Menu -->
+
+      <div class="menu-items">
+        <ul class="items-links">
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-house"></i>
+              <span class="text-link">INICIO</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-house"></i>
+              <span class="text-link">INICIO</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-house"></i>
+              <span class="text-link">INICIO</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-house"></i>
+              <span class="text-link">INICIO</span>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="contenedor-logout">
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-house"></i>
+              <span class="text-link">Configuraciones</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-house"></i>
+              <span class="text-link">Cerrar Sesion</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- Finaliza Menu -->
+    </nav>
+
+    <!-- Comienza contenido dinamico -->
+    <main>
+      <div class="contenedor">
+        <section class="nav navbar-top">
+          <a class="nav-link active" aria-current="page" href="#">Active</a>
+          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link disabled">Disabled</a>
+        </section>
+
+        <!-- Formulario -->
+        <section class="container mt-5">
+          <div class="row text-center d-flex flex-row justify-content-center">
+            <div class="col-md-11">
+              <div class="row mt-2">
+                <div class="card p-4">
+                  <div class="card-title mt-2 text-center display-4">
+                    Creando Factura
+                  </div>
+                  <hr />
+                  <form id="formulario">
+                    <div class="row">
+                      <col-12 class="col-md-4">
+                        <label for="iCodigo" class="col-form-label"
+                          >Codigo:</label
+                        >
+                      </col-12>
+                      <div class="col-12 col-md-6 mb-2">
+                        <input
+                          type="number"
+                          name="vCodigo"
+                          placeholder="Ingrese Codigo"
+                          id="iCodigo"
+                          class="form-control"
+                          autocomplete="off"
+                          maxlength="3"
+                        />
+                        <span
+                          class="d-flex text-danger text-start d-none"
+                          id="spanCodigo"
+                          >Este campo es Obligatorio</span
+                        >
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <col-12 class="col-md-4">
+                        <label for="iDescripcion" class="col-form-label"
+                          >Descripcion:</label
+                        >
+                      </col-12>
+                      <div class="col-12 col-md-6 mb-2">
+                        <input
+                          type="text"
+                          disabled
+                          name="vDescripcion"
+                          placeholder="Descripcion"
+                          id="iDescripcion"
+                          class="form-control"
+                          autocomplete="off"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <col-12 class="col-md-4">
+                        <label for="iCantidad" class="col-form-label"
+                          >Cantidad:</label
+                        >
+                      </col-12>
+                      <div class="col-12 col-md-6 mb-2">
+                        <input
+                          type="number"
+                          name="vCantidad"
+                          placeholder="Ingrese Cantidad"
+                          id="iCantidad"
+                          class="form-control"
+                          autocomplete="off"
+                        />
+                        <span
+                          class="d-flex text-danger text-start d-none"
+                          id="spanCantidad"
+                          >Este campo es Obligatorio</span
+                        >
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <col-12 class="col-md-4">
+                        <button
+                          id="ListadeCodigos"
+                          class="btn btn-outline-info my-2 w-100 text-dark fw-bold"
+                        >
+                          Lista de Codigos
+                        </button>
+                      </col-12>
+                      <div class="col-12 col-md-6">
+                        <div class="row">
+                          <div class="col-12 col-md-6">
+                            <button
+                              id="btnAgregar"
+                              class="btn btn-primary w-100 my-2"
+                            >
+                              Agregar
+                            </button>
+                          </div>
+                          <div class="col-12 col-md-6">
+                            <button
+                              id="btnVaciar"
+                              type="click"
+                              class="btn btn-danger w-100 my-2"
+                            >
+                              Reiniciar Factura
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- formulario -->
+
+        <!-- TABLA PRUEBA -->
+        <div class="container mt-3">
+          <table
+            id="lista"
+            class="d-none table table-hover table-striped table-bordered caption-top"
+          >
+            <caption>
+              <thead class="table-primary">
+                <tr>
+                  <th colspan="5">Factura</th>
+                  <th class="text-center">
+                    Total: $ <span id="spanPrecio">160</span>
+                  </th>
+                </tr>
+              </thead>
+            </caption>
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Codigo</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Precio Unitario</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Sub Total</th>
+                <th scope="col">Accion</th>
+              </tr>
+            </thead>
+            <tbody id="tbody">
+              <!-- aca lo dinamico -->
+            </tbody>
+          </table>
+        </div>
+        <!-- TABLA PRUEBA -->
+      </div>
+    </main>
+    <!-- Finaliza contenido dinamico -->
+
+    <!-- LOS TEMPLATES -->
+    <template id="templateCarrito">
+      <tr>
+        <th class="cod">125</th>
+        <td class="desc">R6-R12 TRASERO ORIGINAL</td>
+        <td class="prec">13.38</td>
+        <td class="cant">10</td>
+        <td class="subt">133.38</td>
+        <td><button class="btn btn-sm btn-danger w-100">Eliminar</button></td>
+      </tr>
+    </template>
+    <!-- LOS TEMPLATES -->
+  </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"
+  ></script>
+  <script src="./js/main.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</html>

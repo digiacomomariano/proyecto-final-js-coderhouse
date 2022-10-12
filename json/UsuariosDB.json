@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "nombreCompleto": "Mariano Perez Garcia",
+    "direccion": "Siempre Linda 127",
+    "provincia": "Santa Fe",
+    "ciudad": "Rosario",
+    "nroCuenta": "057489",
+    "aliasCuenta": "Pepito.Moron.Rojo",
+    "saldo": 0,
+    "usuario": "nano",
+    "clave": "1234",
+    "email": "marianoperez@hotmail.com",
+    "role": "admin"
+  },
+  {
+    "id": 2,
+    "nombreCompleto": "Javier de Los Andes",
+    "direccion": "Pasaje sin Nombre 122",
+    "provincia": "Cordoba",
+    "ciudad": "Cordoba",
+    "nroCuenta": "024579",
+    "aliasCuenta": "Sin.Dominio.Ola",
+    "saldo": 0,
+    "usuario":"javier",
+    "clave": "1793",
+    "email": "javierCordoba@gmail.com",
+    "role": "Usuario"
+  },
+  {
+    "id": 3,
+    "nombreCompleto": "Rodrigo Leto",
+    "direccion": "NoLo Se 254",
+    "provincia": "Santa Fe",
+    "ciudad": "Santa Fe",
+    "nroCuenta": "047859",
+    "aliasCuenta": "Madera.Verde.Cajon",
+    "saldo": 0,
+    "usuario": "rodrigokb",
+    "clave": "1379",
+    "email": "rodrigoLeto@dominio.com",
+    "role": "Usuario"
+  },
+  {
+    "id": 4,
+    "nombreCompleto": "Daniel Suarez",
+    "direccion": "San Martin 615",
+    "provincia": "Santa Fe",
+    "ciudad": "Rosario",
+    "nroCuenta": "024657",
+    "aliasCuenta": "Mueble.Duro.Pesado",
+    "saldo": 0,
+    "usuario": "daniel123",
+    "clave": "9382",
+    "email": "daniel.suarez@gmail.com",
+    "role": "Usuario"
+  }
+]
