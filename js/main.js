@@ -8,7 +8,14 @@ const iCodigo = document.querySelector("#iCodigo");
 const iDescripcion = document.querySelector("#iDescripcion");
 const btnAgregar = document.querySelector("#btnAgregar");
 const spanPrecio = document.querySelector("#spanPrecio");
+const formCliente = document.querySelector("#formCliente");
+const selectCliente = document.querySelector("#selectCliente");
+const templateCodigos = document.querySelector("#templateCodigos").content;
+const codigoLista = document.querySelector("#CodigoLista");
+const btnCodigos = document.querySelector("#btnCodigos");
 let carrito = [];
+let productos = [];
+let clientes = [];
 
 // Clases
 
@@ -23,8 +30,6 @@ class Producto {
   }
 }
 
-let productos = [];
-
 class Carrito {
   constructor(cID, cCodigo, cDescripcion, cCantidad, cPrecioUnit) {
     this.cID = cID;
@@ -38,16 +43,64 @@ class Carrito {
 
 // Funciones
 
-// Obtener datos Json y Enviarlo al array de productos
+// Mostrar clientes segun que opcion elijamos en el Select
+function RenderizarCliente() {
+  if (selectCliente.selectedIndex !== 0) {
+    item = formCliente.elements;
+    cliente = clientes.find((item) => item.id == selectCliente.selectedIndex);
+    item.cNombre.value = cliente.nombre;
+    item.cApellido.value = cliente.apellido;
+    item.cProvincia.value = cliente.provincia;
+    item.cLocalidad.value = cliente.localidad;
+    item.cDireccion.value = cliente.direccion;
+    item.cCodigoPostal.value = cliente.codigoPostal;
+    item.cEmail.value = cliente.email;
+    item.cTelTrabajo.value = Number(cliente.teltrabajo);
+    item.cTelPersonal.value = Number(cliente.telpersonal);
+  } else {
+    formCliente.reset();
+  }
+}
+
+// renderizar Lista de Codigos
+function renderizarCodigos() {
+  codigoLista.textContent = "";
+  productos.forEach((item) => {
+    clone = templateCodigos.cloneNode(true);
+    clone.querySelector(".codigo").textContent = item.codigo;
+    clone.querySelector(".descripcion").textContent = item.descripcion;
+
+    codigoLista.appendChild(clone);
+  });
+}
+
+// Obtener datos Json y Enviarlo al array de productos y Clientes
 const ObtenerDatos = async () => {
+  urlProductos = "./json/ProductosDB.json";
+  urlClientes = "./json/UsuariosDB.json";
   try {
-    const respuesta = await fetch("./json/ProductosDB.json");
-    const data = await respuesta.json();
-    return (productos = data);
+    const [respuestaProducto, respuestaCliente] = await Promise.all([
+      fetch(urlProductos),
+      fetch(urlClientes),
+    ]);
+    const arrayProductos = await respuestaProducto.json();
+    const arrayClientes = await respuestaCliente.json();
+    productos = arrayProductos;
+    clientes = arrayClientes;
+
+    ClienteSelect();
   } catch (error) {
     console.log(error);
   }
 };
+
+// Insertamos Options al Select de Clientes
+function ClienteSelect() {
+  clientes.forEach((cliente) => {
+    option = `<option value="${cliente.id}">${cliente.nombre} ${cliente.apellido}</option>`;
+    selectCliente.insertAdjacentHTML("beforeend", option);
+  });
+}
 
 // Capturar datos FORM
 formularioIU.addEventListener("submit", (e) => {
@@ -144,6 +197,13 @@ const pintarCarrito = () => {
 };
 
 // E V E N T O S
+// Renderizar Codigos al dar click en el boton
+btnCodigos.addEventListener("click", renderizarCodigos);
+
+// Detectar cliente en Select
+
+selectCliente.addEventListener("click", RenderizarCliente);
+
 // BUSCADOR EN TIEMPO REAL -
 iCodigo.addEventListener("keyup", () => {
   let vCodigo = Number(iCodigo.value);
@@ -160,10 +220,6 @@ iCodigo.addEventListener("keyup", () => {
       iDescripcion.value = "Esperando Codigo...";
     }
   }
-
-  iCodigo.addEventListener("click", () => {
-    console.log("holamundo");
-  });
 });
 
 // PUSHEAR FACTURA
@@ -191,6 +247,8 @@ btnVaciar.addEventListener("click", (e) => {
     }
   });
 });
+
+// Lo primero en Cargar
 
 document.addEventListener("DOMContentLoaded", (e) => {
   // if (!sessionStorage.getItem("Sesion")) {

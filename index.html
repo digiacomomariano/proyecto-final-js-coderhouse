@@ -40,19 +40,19 @@
           <li>
             <a href="#">
               <i class="fa-solid fa-house"></i>
-              <span class="text-link">INICIO</span>
+              <span class="text-link">Clientes</span>
             </a>
           </li>
           <li>
             <a href="#">
               <i class="fa-solid fa-house"></i>
-              <span class="text-link">INICIO</span>
+              <span class="text-link">Productos</span>
             </a>
           </li>
           <li>
             <a href="#">
               <i class="fa-solid fa-house"></i>
-              <span class="text-link">INICIO</span>
+              <span class="text-link">Facturas</span>
             </a>
           </li>
         </ul>
@@ -85,13 +85,146 @@
           <a class="nav-link disabled">Disabled</a>
         </section>
 
-        <!-- Formulario -->
-        <section class="container mt-5">
+        <section>
+          <div class="card m-4 p-3">
+            <div class="card-body">
+              <section
+                class="d-flex align-items-center justify-content-between"
+              >
+                <div>
+                  <h2 class="display-5 card-title">Clientes</h2>
+                </div>
+                <div class="p-2">
+                  <select
+                    class="form-select form-select-lg"
+                    name="selectCliente"
+                    id="selectCliente"
+                  >
+                    <option value="">-- Seleccione un Cliente --</option>
+                  </select>
+                </div>
+                <div class="d-flex">
+                  <button class="btn btn-primary p-2">Crear Cliente</button>
+                </div>
+              </section>
+              <hr />
+              <form id="formCliente" class="row g-3">
+                <div class="col-md-6">
+                  <label for="cNombre" class="form-label">Nombre</label>
+                  <input
+                    disabled
+                    type="text"
+                    class="form-control"
+                    id="cNombre"
+                    name="cNombre"
+                    placeholder="Nombre"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="cApellido" class="form-label">Apellido</label>
+                  <input
+                    disabled
+                    type="text"
+                    class="form-control"
+                    id="cApellido"
+                    name="cApellido"
+                    placeholder="Apellido"
+                  />
+                </div>
+                <div class="col-3">
+                  <label for="cProvincia" class="form-label">Provincia</label>
+                  <input
+                    disabled
+                    type="text"
+                    class="form-control"
+                    id="cProvincia"
+                    name="cProvincia"
+                    placeholder="ej: Santa Fe"
+                  />
+                </div>
+                <div class="col-3">
+                  <label for="cLocalidad" class="form-label">Localidad</label>
+                  <input
+                    disabled
+                    type="text"
+                    class="form-control"
+                    id="cLocalidad"
+                    name="cLocalidad"
+                    placeholder="ej: Rosario"
+                  />
+                </div>
+                <div class="col-4">
+                  <label for="cDireccion" class="form-label">Direccion</label>
+                  <input
+                    disabled
+                    type="text"
+                    class="form-control"
+                    id="cDireccion"
+                    name="cDireccion"
+                    placeholder="ej: Cordoba 2045"
+                  />
+                </div>
+                <div class="col-2">
+                  <label for="cCodigoPostal" class="form-label"
+                    >Codigo Postal</label
+                  >
+                  <input
+                    disabled
+                    type="number"
+                    class="form-control"
+                    id="cCodigoPostal"
+                    name="cCodigoPostal"
+                    placeholder="ej: 2000"
+                  />
+                </div>
+                <div class="col-6">
+                  <label for="cEmail" class="form-label">Email</label>
+                  <input
+                    disabled
+                    type="email"
+                    class="form-control"
+                    id="cEmail"
+                    name="cEmail"
+                    placeholder="Escribe el Email"
+                  />
+                </div>
+                <div class="col-3">
+                  <label for="cTelTrabajo" class="form-label"
+                    >Telefono Trabajo</label
+                  >
+                  <input
+                    disabled
+                    type="number"
+                    class="form-control"
+                    id="cTelTrabajo"
+                    name="cTelTrabajo"
+                    placeholder="Telefono Trabajo"
+                  />
+                </div>
+                <div class="col-3">
+                  <label for="cTelPersonal" class="form-label"
+                    >Telefono Personal</label
+                  >
+                  <input
+                    disabled
+                    type="email"
+                    class="form-control"
+                    id="cTelPersonal"
+                    name="cTelPersonal"
+                    placeholder="Telefono Personal"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <section class="m-4 p-3">
           <div class="row text-center d-flex flex-row justify-content-center">
-            <div class="col-md-11">
+            <div class="col-md-12">
               <div class="row mt-2">
                 <div class="card p-4">
-                  <div class="card-title mt-2 text-center display-4">
+                  <div class="card-title mt-2 text-center display-5">
                     Creando Factura
                   </div>
                   <hr />
@@ -165,11 +298,24 @@
                     <div class="row">
                       <col-12 class="col-md-4">
                         <button
-                          id="ListadeCodigos"
                           class="btn btn-outline-info my-2 w-100 text-dark fw-bold"
+                          type="button"
+                          data-bs-toggle="offcanvas"
+                          data-bs-target="#listaDeCodigos"
+                          aria-controls="listaDeCodigos"
+                          id="btnCodigos"
                         >
                           Lista de Codigos
                         </button>
+                        <!-- <button
+                          class="btn btn-primary"
+                          type="button"
+                          data-bs-toggle="offcanvas"
+                          data-bs-target="#offcanvasScrolling"
+                          aria-controls="offcanvasScrolling"
+                        >
+                          Enable body scrolling
+                        </button> -->
                       </col-12>
                       <div class="col-12 col-md-6">
                         <div class="row">
@@ -199,9 +345,8 @@
             </div>
           </div>
         </section>
-        <!-- formulario -->
 
-        <!-- TABLA PRUEBA -->
+        <!-- TABLA -->
         <div class="container mt-3">
           <table
             id="lista"
@@ -236,6 +381,50 @@
       </div>
     </main>
     <!-- Finaliza contenido dinamico -->
+
+    <!-- SIDEBAR LISTA DE PRODUCTOS -->
+    <div
+      class="offcanvas offcanvas-start"
+      data-bs-scroll="true"
+      data-bs-backdrop="false"
+      tabindex="-1"
+      id="listaDeCodigos"
+      aria-labelledby="listaDeCodigos"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">
+          Codigos Disponibles
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <hr />
+      <div class="offcanvas-body">
+        <table
+          class="table table-hover table-striped table-bordered caption-top text-center"
+        >
+          <thead>
+            <tr>
+              <th>Codigo</th>
+              <th>Descripcion</th>
+            </tr>
+          </thead>
+          <tbody id="CodigoLista"></tbody>
+        </table>
+      </div>
+    </div>
+    <!-- SIDEBAR LISTA DE PRODUCTOS -->
+
+    <template id="templateCodigos">
+      <tr>
+        <th class="codigo">125</th>
+        <td class="descripcion">R6-R12 TRASERO ORIGINAL</tdc>
+      </tr>
+    </template>
 
     <!-- LOS TEMPLATES -->
     <template id="templateCarrito">
