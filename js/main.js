@@ -40,31 +40,6 @@ class Producto {
   }
 }
 
-// class Cliente {
-//   constructor(
-//     nombre,
-//     apellido,
-//     direccion,
-//     provincia,
-//     localidad,
-//     teltrabajo,
-//     telpersonal,
-//     codigoPostal,
-//     email
-//   ) {
-//     (this.id = generarID()),
-//       (this.nombre = nombre),
-//       (this.apellido = apellido),
-//       (this.direccion = direccion),
-//       (this.provincia = provincia),
-//       (this.localidad = localidad),
-//       (this.teltrabajo = teltrabajo),
-//       (this.telpersonal = telpersonal),
-//       (this.codigoPostal = codigoPostal),
-//       (this.email = email);
-//   }
-// }
-
 class Carrito {
   constructor(cID, cCodigo, cDescripcion, cCantidad, cPrecioUnit) {
     this.cID = cID;
@@ -173,7 +148,8 @@ function renderizarCodigos() {
 const ObtenerDatos = async () => {
   urlProductos =
     "https://digiacomomariano.github.io/proyecto-final-js-coderhouse/json/ProductosDB.json";
-  urlClientes = "./json/UsuariosDB.json";
+  urlClientes =
+    "https://digiacomomariano.github.io/proyecto-final-js-coderhouse/json/UsuariosDB.json";
   try {
     const [respuestaProducto, respuestaCliente] = await Promise.all([
       fetch(urlProductos),
