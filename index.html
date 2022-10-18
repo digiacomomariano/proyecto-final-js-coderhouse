@@ -52,9 +52,9 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#verFacturas">
               <i class="fa-solid fa-house"></i>
-              <span class="text-link">Facturas</span>
+              <span class="text-link">Ver Facturas</span>
             </a>
           </li>
         </ul>
@@ -120,7 +120,7 @@
                     name="selectCliente"
                     id="selectCliente"
                   >
-                    <option value="">-- Seleccione un Cliente --</option>
+                    <option selected value="0">-- Seleccione un Cliente --</option>
                   </select>
                 </div>
                 <div class="d-flex">
@@ -318,36 +318,27 @@
                     </div>
 
                     <div class="row">
-                      <col-12 class="col-md-4">
-                        <button
-                          class="btn btn-outline-info my-2 w-100 text-dark fw-bold"
-                          type="button"
-                          data-bs-toggle="offcanvas"
-                          data-bs-target="#listaDeCodigos"
-                          aria-controls="listaDeCodigos"
-                          id="btnCodigos"
-                        >
-                          Lista de Codigos
-                        </button>
-                      </col-12>
-                      <div class="col-12 col-md-6">
+                        <div class="offset-4 col-12 col-md-6">
                         <div class="row">
                           <div class="col-12 col-md-6">
                             <button
-                              id="btnAgregar"
-                              class="btn btn-primary w-100 my-2"
-                            >
-                              Agregar
-                            </button>
-                          </div>
+                              class="btn btn-success my-2 w-100 text-white fw-bold"
+                              type="button"
+                              data-bs-toggle="offcanvas"
+                              data-bs-target="#listaDeCodigos"
+                              aria-controls="listaDeCodigos"
+                              id="btnCodigos"
+                              >
+                              Lista de Codigos
+                          </button>
+                        </div>
                           <div class="col-12 col-md-6">
-                            <button
-                              id="btnVaciar"
-                              type="click"
-                              class="btn btn-danger w-100 my-2"
-                            >
-                              Reiniciar Factura
-                            </button>
+                              <button
+                                  id="btnAgregar"
+                                  class="btn btn-primary fw-bold w-100 my-2"
+                                  >
+                                  Agregar
+                              </button>
                           </div>
                         </div>
                       </div>
@@ -442,9 +433,9 @@
         <!-- TABLA CARRITO -->
       </div>
       <section>
-        <nav class="navbar w-100">
-          <button class="btn btn-success rounded-1">Finalizar Factura</button>
-          <button class="btn btn-danger rounded-1">Eliminar Factura</button>
+        <nav id="btnnavbar" class="navbar w-100">
+          <button id="btnVaciarFactura" class="btn btn-danger rounded-1">Vaciar Factura</button>
+          <button id="btnEnviarFactura" class="btn btn-success rounded-1">Enviar Factura</button>
         </nav>
       </section>
     </section>

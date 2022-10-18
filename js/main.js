@@ -1,31 +1,41 @@
 // Variables Globales
+
+// Const OTROS
 const lista = document.querySelector("#lista");
 const tbody = document.querySelector("#tbody");
-const templateCarrito = document.querySelector("#templateCarrito").content;
-const formularioIU = document.querySelector("#formulario");
-const btnVaciar = document.querySelector("#btnVaciar");
-const iCodigo = document.querySelector("#iCodigo");
-const iDescripcion = document.querySelector("#iDescripcion");
-const btnAgregar = document.querySelector("#btnAgregar");
 const spanPrecio = document.querySelector("#spanPrecio");
+const codigoLista = document.querySelector("#CodigoLista");
+const badge = document.querySelector(".badge");
+const btnnavbar = document.querySelector("#btnnavbar");
+//  Const Form
+const formularioIU = document.querySelector("#formulario");
+const iDescripcion = document.querySelector("#iDescripcion");
+const iCodigo = document.querySelector("#iCodigo");
 const formCliente = document.querySelector("#formCliente");
 const formCrearCliente = document.querySelector("#formCrearCliente");
 const selectCliente = document.querySelector("#selectCliente");
+//  Const Templates
+const templateCarrito = document.querySelector("#templateCarrito").content;
 const templateCodigos = document.querySelector("#templateCodigos").content;
-const codigoLista = document.querySelector("#CodigoLista");
+//  Const Botones
+const btnVaciar = document.querySelector("#btnVaciar");
+const btnAgregar = document.querySelector("#btnAgregar");
 const btnCodigos = document.querySelector("#btnCodigos");
-const badge = document.querySelector(".badge");
 const cartIcon = document.querySelector(".icon");
 const btnNewClient = document.querySelector("#btnNewClient");
+const btnEnviarFactura = document.querySelector("#btnEnviarFactura");
+const btnVaciarFactura = document.querySelector("#btnVaciarFactura");
 
-//instancio modal de crear cliente
-const modal = new bootstrap.Modal(document.getElementById("CrearCliente"), {
-  keyboard: false,
-});
-
+//Array
 let carrito = [];
 let productos = [];
 let clientes = [];
+let factura = [];
+
+//  Instancio modal de crear cliente
+const modal = new bootstrap.Modal(document.getElementById("CrearCliente"), {
+  keyboard: false,
+});
 
 // Clases
 
@@ -102,7 +112,11 @@ function newClient() {
     // Cerrar Modal
     modal.toggle();
   } else {
-    console.log("Todos los campos son obligatorios");
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Lo siento, Todos los campos son Obligatorios",
+    });
   }
 }
 
@@ -166,16 +180,19 @@ const ObtenerDatos = async () => {
   }
 };
 
-// Insertamos Options al Select de Clientes
+//  Insertamos Options al Select de Clientes
+
 function ClienteSelect() {
   selectCliente.textContent = "";
   selectCliente.insertAdjacentHTML(
     "beforeend",
-    `<option value="">-- Seleccione un Cliente --</option>`
+    `<option selected value="0">-- Seleccione un Cliente --</option>`
   );
   clientes.forEach((cliente) => {
-    option = `<option value="${cliente.id}">${cliente.nombre} ${cliente.apellido}</option>`;
-    selectCliente.insertAdjacentHTML("beforeend", option);
+    const opciones = document.createElement("option");
+    opciones.value = cliente.id;
+    opciones.text = `${cliente.nombre} ${cliente.apellido} `;
+    selectCliente.appendChild(opciones);
   });
 }
 
@@ -232,6 +249,10 @@ const sumaTotal = () => {
 
 // Mostrar Carrito
 const pintarCarrito = () => {
+  //Comprobar si existen elemntos en el carrito para mostrar botones
+  carrito.length > 0
+    ? btnnavbar.classList.remove("d-none")
+    : btnnavbar.classList.add("d-none");
   //LocalStorage
   localStorage.setItem("carrito_db", JSON.stringify(carrito));
   badge.textContent = "";
@@ -279,7 +300,7 @@ btnCodigos.addEventListener("click", renderizarCodigos);
 
 // Detectar cliente en Select
 
-selectCliente.addEventListener("click", RenderizarCliente);
+selectCliente.addEventListener("change", RenderizarCliente);
 
 // BUSCADOR EN TIEMPO REAL -
 iCodigo.addEventListener("keyup", () => {
@@ -299,16 +320,43 @@ iCodigo.addEventListener("keyup", () => {
   }
 });
 
+//  Evento Finalizar factura -
+btnEnviarFactura.addEventListener("click", (e) => {
+  e.preventDefault();
+  clienteID = selectCliente.value;
+  if (clienteID !== "0") {
+    // Pushear Factura
+    factura.push({
+      idfactura: generarID(),
+      idcliente: clienteID,
+      detalle: carrito,
+    });
+    selectCliente.selectedIndex = 0;
+    // Limpiamos Carrito, Reiniciamos Formulario de cliente, volvemos a renderizar carrito vacio
+    carrito = [];
+    formCliente.reset();
+    pintarCarrito();
+    //  Guardamos Factura en el localStorage
+    localStorage.setItem("factura_db", JSON.stringify(factura));
+  } else {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Por favor seleccione un cliente Valido",
+    });
+  }
+});
+
 // Nuevo CLiente
 
 btnNewClient.addEventListener("click", newClient);
 
-// Boton Vaciar Carrito
-btnVaciar.addEventListener("click", (e) => {
+// Boton Vaciar Factura
+btnVaciarFactura.addEventListener("click", (e) => {
   e.preventDefault();
   // Alerta para Reiniciar Factura
   Swal.fire({
-    text: "¿Estas seguro que deseas Reinciar la Factura?",
+    text: "¿Estas seguro que deseas Vaciar la Factura?",
     showConfirmButton: true,
     showDenyButton: true,
     confirmButtonText: "SI",
@@ -322,7 +370,6 @@ btnVaciar.addEventListener("click", (e) => {
       carrito = [];
       formularioIU.reset();
       pintarCarrito();
-      iCodigo.focus();
     }
   });
 });
