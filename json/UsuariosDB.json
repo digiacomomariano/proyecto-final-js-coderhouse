@@ -1,73 +1,50 @@
 [
   {
-    "id": 1,
+    "id": "rzmmh6xiop",
     "nombre": "Mariano",
     "apellido": "Perez Garcia",
     "direccion": "Siempre Linda 127",
     "provincia": "Santa Fe",
     "localidad": "Rosario",
-    "nroCuenta": "057489",
-    "aliasCuenta": "Pepito.Moron.Rojo",
     "teltrabajo": "0245878",
     "telpersonal": "45654886",
     "codigoPostal": "2000",
-    "email": "marianoperez@hotmail.com",
-    "usuario": "nano",
-    "clave": "1234",
-    "role": "admin"
+    "email": "marianoperez@hotmail.com"
   },
   {
-    "id": 2,
+    "id": "5sqaduvtc",
     "nombre": "Javier",
     "apellido": "de Los Andes",
     "direccion": "Pasaje sin Nombre 122",
     "provincia": "Cordoba",
     "localidad": "Cordoba",
-    "nroCuenta": "024579",
-    "aliasCuenta": "Sin.Dominio.Ola",
     "teltrabajo": "0249978",
     "telpersonal": "456548876",
-    "email": "javierCordoba@gmail.com",
     "codigoPostal": "2040",
-    "saldo": 0,
-    "usuario":"javier",
-    "clave": "1793",
-    "role": "Usuario"
+    "email": "javierCordoba@gmail.com"
   },
   {
-    "id": 3,
+    "id": "4xeb9mkdl1g",
     "nombre": "Rodrigo",
     "apellido": "Leto",
     "direccion": "NoLo Se 254",
     "provincia": "Santa Fe",
     "localidad": "Santa Fe",
-    "nroCuenta": "047859",
-    "aliasCuenta": "Madera.Verde.Cajon",
     "teltrabajo": "0249548",
     "telpersonal": "456543276",
-    "email": "rodrigoLeto@dominio.com",
     "codigoPostal": "3500",
-    "saldo": 0,
-    "usuario": "rodrigokb",
-    "clave": "1379",
-    "role": "Usuario"
+    "email": "rodrigoLeto@dominio.com"
   },
   {
-    "id": 4,
+    "id": "ph4rcickwa",
     "nombre": "Daniel",
     "apellido": "Suarez",
     "direccion": "San Martin 615",
     "provincia": "Santa Fe",
     "localidad": "Rosario",
-    "nroCuenta": "024657",
-    "aliasCuenta": "Mueble.Duro.Pesado",
     "teltrabajo": "4549978",
     "telpersonal": "422548876",
-    "email": "daniel.suarez@gmail.com",
     "codigoPostal": "3000",
-    "saldo": 0,
-    "usuario": "daniel123",
-    "clave": "9382",
-    "role": "Usuario"
+    "email": "daniel.suarez@gmail.com"
   }
 ]

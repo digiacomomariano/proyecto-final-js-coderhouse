@@ -9,10 +9,20 @@ const iDescripcion = document.querySelector("#iDescripcion");
 const btnAgregar = document.querySelector("#btnAgregar");
 const spanPrecio = document.querySelector("#spanPrecio");
 const formCliente = document.querySelector("#formCliente");
+const formCrearCliente = document.querySelector("#formCrearCliente");
 const selectCliente = document.querySelector("#selectCliente");
 const templateCodigos = document.querySelector("#templateCodigos").content;
 const codigoLista = document.querySelector("#CodigoLista");
 const btnCodigos = document.querySelector("#btnCodigos");
+const badge = document.querySelector(".badge");
+const cartIcon = document.querySelector(".icon");
+const btnNewClient = document.querySelector("#btnNewClient");
+
+//instancio modal de crear cliente
+const modal = new bootstrap.Modal(document.getElementById("CrearCliente"), {
+  keyboard: false,
+});
+
 let carrito = [];
 let productos = [];
 let clientes = [];
@@ -30,6 +40,31 @@ class Producto {
   }
 }
 
+// class Cliente {
+//   constructor(
+//     nombre,
+//     apellido,
+//     direccion,
+//     provincia,
+//     localidad,
+//     teltrabajo,
+//     telpersonal,
+//     codigoPostal,
+//     email
+//   ) {
+//     (this.id = generarID()),
+//       (this.nombre = nombre),
+//       (this.apellido = apellido),
+//       (this.direccion = direccion),
+//       (this.provincia = provincia),
+//       (this.localidad = localidad),
+//       (this.teltrabajo = teltrabajo),
+//       (this.telpersonal = telpersonal),
+//       (this.codigoPostal = codigoPostal),
+//       (this.email = email);
+//   }
+// }
+
 class Carrito {
   constructor(cID, cCodigo, cDescripcion, cCantidad, cPrecioUnit) {
     this.cID = cID;
@@ -43,11 +78,71 @@ class Carrito {
 
 // Funciones
 
+function newClient() {
+  item = formCrearCliente.elements;
+  const [
+    cNombre,
+    cApellido,
+    cProvincia,
+    cLocalidad,
+    cDireccion,
+    cCodigoPostal,
+    cEmail,
+    cTelTrabajo,
+    cTelPersonal,
+  ] = item;
+  if (
+    ![
+      cNombre.value,
+      cApellido.value,
+      cProvincia.value,
+      cLocalidad.value,
+      cDireccion.value,
+      cCodigoPostal.value,
+      cEmail.value,
+      cTelTrabajo.value,
+      cTelPersonal.value,
+    ].includes("")
+  ) {
+    // Pushear cliente nuevo y cerrar modal.
+    clientes.push({
+      id: generarID(),
+      nombre: cNombre.value,
+      apellido: cApellido.value,
+      direccion: cDireccion.value,
+      provincia: cProvincia.value,
+      localidad: cLocalidad.value,
+      teltrabajo: cTelTrabajo.value,
+      telpersonal: cTelPersonal.value,
+      codigoPostal: cCodigoPostal.value,
+      email: cEmail.value,
+    });
+
+    // renderizar clientes
+    ClienteSelect();
+
+    // reset form
+    formCrearCliente.reset();
+
+    // Cerrar Modal
+    modal.toggle();
+  } else {
+    console.log("Todos los campos son obligatorios");
+  }
+}
+
+// GENERADOR DE ID
+function generarID() {
+  const a = Math.random().toString(36).substring(2);
+  const b = Date.now().toString(36);
+  return a + b;
+}
+
 // Mostrar clientes segun que opcion elijamos en el Select
 function RenderizarCliente() {
   if (selectCliente.selectedIndex !== 0) {
     item = formCliente.elements;
-    cliente = clientes.find((item) => item.id == selectCliente.selectedIndex);
+    cliente = clientes.find((item) => item.id === selectCliente.value);
     item.cNombre.value = cliente.nombre;
     item.cApellido.value = cliente.apellido;
     item.cProvincia.value = cliente.provincia;
@@ -76,7 +171,8 @@ function renderizarCodigos() {
 
 // Obtener datos Json y Enviarlo al array de productos y Clientes
 const ObtenerDatos = async () => {
-  urlProductos = "./json/ProductosDB.json";
+  urlProductos =
+    "https://digiacomomariano.github.io/proyecto-final-js-coderhouse/json/ProductosDB.json";
   urlClientes = "./json/UsuariosDB.json";
   try {
     const [respuestaProducto, respuestaCliente] = await Promise.all([
@@ -96,6 +192,11 @@ const ObtenerDatos = async () => {
 
 // Insertamos Options al Select de Clientes
 function ClienteSelect() {
+  selectCliente.textContent = "";
+  selectCliente.insertAdjacentHTML(
+    "beforeend",
+    `<option value="">-- Seleccione un Cliente --</option>`
+  );
   clientes.forEach((cliente) => {
     option = `<option value="${cliente.id}">${cliente.nombre} ${cliente.apellido}</option>`;
     selectCliente.insertAdjacentHTML("beforeend", option);
@@ -137,8 +238,8 @@ const cargarFactura = (cod, cant) => {
     showConfirmButton: false,
     icon: "success",
     toast: true,
-    position: "top-end",
-    timer: 3000,
+    position: "bottom-end",
+    timer: 1500,
   });
 
   pintarCarrito();
@@ -157,20 +258,20 @@ const sumaTotal = () => {
 const pintarCarrito = () => {
   //LocalStorage
   localStorage.setItem("carrito_db", JSON.stringify(carrito));
+  badge.textContent = "";
   spanPrecio.textContent = "";
   tbody.textContent = "";
   lista.classList.add("d-none");
   carrito.forEach((item) => {
+    badge.textContent = carrito.length;
+    badge.classList.remove("d-none");
     lista.classList.remove("d-none");
     const clone = templateCarrito.cloneNode(true);
     const { cCodigo, cDescripcion, cPrecioUnit, cCantidad, cSubTotal, cID } =
       item;
     clone.querySelector(".cod").textContent = cCodigo;
-    clone.querySelector(".desc").textContent = cDescripcion;
     clone.querySelector(".prec").textContent = cPrecioUnit;
     clone.querySelector(".cant").textContent = cCantidad;
-    subTotal = cSubTotal;
-    clone.querySelector(".subt").textContent = subTotal.toFixed(2);
     clone.querySelector(".btn-danger").dataset.id = cID;
     spanPrecio.textContent = sumaTotal();
 
@@ -188,7 +289,7 @@ const pintarCarrito = () => {
         showConfirmButton: false,
         icon: "success",
         toast: true,
-        position: "top-end",
+        position: "bottom-end",
         timer: 3000,
       });
     });
@@ -222,7 +323,9 @@ iCodigo.addEventListener("keyup", () => {
   }
 });
 
-// PUSHEAR FACTURA
+// Nuevo CLiente
+
+btnNewClient.addEventListener("click", newClient);
 
 // Boton Vaciar Carrito
 btnVaciar.addEventListener("click", (e) => {

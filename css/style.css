@@ -176,6 +176,11 @@ nav.cerrar li a .text-link{
     box-shadow: 0px 2px 5px -6px black;
 }
 
+.icon{
+    cursor: pointer;
+    font-size: 2rem;
+}
+
 
 
 

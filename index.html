@@ -15,8 +15,10 @@
     ></script>
     <link rel="stylesheet" href="./css/style.css" />
     <title>Panel de Control</title>
+
   </head>
   <body>
+    <!-- SIDEBAR IZQ -->
     <nav>
       <!-- Comienza logo -->
       <div class="contenedor-brand">
@@ -74,15 +76,33 @@
       </div>
       <!-- Finaliza Menu -->
     </nav>
+    <!-- SIDEBAR IZQ -->
 
     <!-- Comienza contenido dinamico -->
     <main>
       <div class="contenedor">
-        <section class="nav navbar-top">
-          <a class="nav-link active" aria-current="page" href="#">Active</a>
-          <a class="nav-link" href="#">Link</a>
-          <a class="nav-link" href="#">Link</a>
-          <a class="nav-link disabled">Disabled</a>
+        <section class="navbar justify-content-end me-4">
+         
+          <div class="p-3 me-3 position-relative mt-2">
+            <i
+              data-bs-toggle="offcanvas"
+              data-bs-target="#Carrito"
+              aria-controls="CarritodeCompras"
+              class="icon 
+                     fa-solid 
+                     fa-cart-shopping"
+            ></i>
+          <span 
+              class="d-none position-absolute 
+              top-0 start-100 
+              translate-middle 
+              badge 
+              rounded-pill 
+              bg-danger"
+              >
+        </span>
+          </div>
+
         </section>
 
         <section>
@@ -104,7 +124,9 @@
                   </select>
                 </div>
                 <div class="d-flex">
-                  <button class="btn btn-primary p-2">Crear Cliente</button>
+                  <button type="button" class="btn btn-primary p-2" data-bs-toggle="modal" data-bs-target="#CrearCliente">
+                    Crear Cliente
+                  </button>
                 </div>
               </section>
               <hr />
@@ -307,15 +329,6 @@
                         >
                           Lista de Codigos
                         </button>
-                        <!-- <button
-                          class="btn btn-primary"
-                          type="button"
-                          data-bs-toggle="offcanvas"
-                          data-bs-target="#offcanvasScrolling"
-                          aria-controls="offcanvasScrolling"
-                        >
-                          Enable body scrolling
-                        </button> -->
                       </col-12>
                       <div class="col-12 col-md-6">
                         <div class="row">
@@ -346,44 +359,14 @@
           </div>
         </section>
 
-        <!-- TABLA -->
-        <div class="container mt-3">
-          <table
-            id="lista"
-            class="d-none table table-hover table-striped table-bordered caption-top"
-          >
-            <caption>
-              <thead class="table-primary">
-                <tr>
-                  <th colspan="5">Factura</th>
-                  <th class="text-center">
-                    Total: $ <span id="spanPrecio">160</span>
-                  </th>
-                </tr>
-              </thead>
-            </caption>
-            <thead class="table-dark">
-              <tr>
-                <th scope="col">Codigo</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Precio Unitario</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Sub Total</th>
-                <th scope="col">Accion</th>
-              </tr>
-            </thead>
-            <tbody id="tbody">
-              <!-- aca lo dinamico -->
-            </tbody>
-          </table>
-        </div>
-        <!-- TABLA PRUEBA -->
+        <!-- aca estaba la tabla -->
       </div>
     </main>
-    <!-- Finaliza contenido dinamico -->
+    <!-- finaliza contenido dinamico -->
+   
 
     <!-- SIDEBAR LISTA DE PRODUCTOS -->
-    <div
+    <section
       class="offcanvas offcanvas-start"
       data-bs-scroll="true"
       data-bs-backdrop="false"
@@ -416,8 +399,163 @@
           <tbody id="CodigoLista"></tbody>
         </table>
       </div>
-    </div>
+    </section>
     <!-- SIDEBAR LISTA DE PRODUCTOS -->
+
+    <!-- SIDEBAR CARRITO -->  
+    <section class="offcanvas offcanvas-end" tabindex="-1" id="Carrito" aria-labelledby="CarritodeCompras">
+      <div class="offcanvas-header">
+        <h3 class="offcanvas-title" id="Carrito01">Tu Carrito</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>  
+      </div>
+      <hr>
+      <div class="offcanvas-body">
+        <!-- TABLA CARRITO -->
+        <div class="container mt-3">
+          <table
+            id="lista"
+            class="d-none table table-hover table-striped table-bordered caption-top"
+          >
+            <caption>
+              <thead class="table-primary">
+                <tr>
+                  <th>Factura</th>
+                  <th colspan="3" class="text-end">
+                    Total: $ <span id="spanPrecio">160</span>
+                  </th>
+                </tr>
+              </thead>
+            </caption>
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Codigo</th>
+                <th scope="col">P. Unit.</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Accion</th>
+              </tr>
+            </thead>
+            <tbody id="tbody">
+              <!-- aca lo dinamico -->
+            </tbody>
+          </table>
+        </div>
+        <!-- TABLA CARRITO -->
+      </div>
+      <section>
+        <nav class="navbar w-100">
+          <button class="btn btn-success rounded-1">Finalizar Factura</button>
+          <button class="btn btn-danger rounded-1">Eliminar Factura</button>
+        </nav>
+      </section>
+    </section>
+    <!-- SIDEBAR CARRITO -->
+
+    <!-- MODAL NUEVO CLIENTE -->
+    <div class="modal fade" id="CrearCliente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="ModalTitle">Registrar Nuevo Cliente</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="formCrearCliente" class="row g-3">
+              <div class="col-md-6">
+                <label for="cNombre" class="form-label">Nombre</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="cNombre"
+                  placeholder="Nombre"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="cApellido" class="form-label">Apellido</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="cApellido"
+                  placeholder="Apellido"
+                />
+              </div>
+              <div class="col-3">
+                <label for="cProvincia" class="form-label">Provincia</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="cProvincia"
+                  placeholder="ej: Santa Fe"
+                />
+              </div>
+              <div class="col-3">
+                <label for="cLocalidad" class="form-label">Localidad</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="cLocalidad"
+                  placeholder="ej: Rosario"
+                />
+              </div>
+              <div class="col-4">
+                <label for="cDireccion" class="form-label">Direccion</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="cDireccion"
+                  placeholder="ej: Cordoba 2045"
+                />
+              </div>
+              <div class="col-2">
+                <label for="cCodigoPostal" class="form-label"
+                  >Codigo Postal</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  name="cCodigoPostal"
+                  placeholder="ej: 2000"
+                />
+              </div>
+              <div class="col-6">
+                <label for="cEmail" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  name="cEmail"
+                  placeholder="Escribe el Email"
+                />
+              </div>
+              <div class="col-3">
+                <label for="cTelTrabajo" class="form-label"
+                  >Telefono Trabajo</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  name="cTelTrabajo"
+                  placeholder="Telefono Trabajo"
+                />
+              </div>
+              <div class="col-3">
+                <label for="cTelPersonal" class="form-label"
+                  >Telefono Personal</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  name="cTelPersonal"
+                  placeholder="Telefono Personal"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="btnNewClient" class="btn btn-primary" >Guardar Cliente</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL NUEVO CLIENTE -->
 
     <template id="templateCodigos">
       <tr>
@@ -428,13 +566,11 @@
 
     <!-- LOS TEMPLATES -->
     <template id="templateCarrito">
-      <tr>
+      <tr class="text-center">
         <th class="cod">125</th>
-        <td class="desc">R6-R12 TRASERO ORIGINAL</td>
         <td class="prec">13.38</td>
         <td class="cant">10</td>
-        <td class="subt">133.38</td>
-        <td><button class="btn btn-sm btn-danger w-100">Eliminar</button></td>
+        <td><button class="btn btn-sm btn-danger w-100 fw-bold">X</button></td>
       </tr>
     </template>
     <!-- LOS TEMPLATES -->
@@ -444,6 +580,6 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"
   ></script>
-  <script src="./js/main.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="./js/main.js"></script>
 </html>
