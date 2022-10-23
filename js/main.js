@@ -348,17 +348,6 @@ function ListarFacturas() {
   });
 }
 
-// render factura
-
-function RenderFacturaCliente(nameid) {
-  // console.log("me diste click");
-  // const ulFactura = document.querySelector("#ulFactura");
-  // ulFactura.textContent = "";
-  // clone = templateLI.cloneNode(true);
-  // clone.querySelector("a").textContent = "nameid";
-  sectionVerFactura.querySelector("#ulFactura li a").textContent = "hola";
-}
-
 // E V E N T O S
 
 // Llamar funcion para ver facturas
