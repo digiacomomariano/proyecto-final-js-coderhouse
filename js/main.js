@@ -3,6 +3,8 @@
 // Const OTROS
 const lista = document.querySelector("#lista");
 const tbody = document.querySelector("#tbody");
+const sectionVerFactura = document.querySelector("#sectionVerFactura");
+const anclaFactura = document.querySelector("#anclaFactura");
 const spanPrecio = document.querySelector("#spanPrecio");
 const codigoLista = document.querySelector("#CodigoLista");
 const badge = document.querySelector(".badge");
@@ -15,8 +17,13 @@ const formCliente = document.querySelector("#formCliente");
 const formCrearCliente = document.querySelector("#formCrearCliente");
 const selectCliente = document.querySelector("#selectCliente");
 //  Const Templates
+const templateLI = document.querySelector("#templateLI").content;
 const templateCarrito = document.querySelector("#templateCarrito").content;
 const templateCodigos = document.querySelector("#templateCodigos").content;
+const templateListarFactura = document.querySelector(
+  "#templateListarFactura"
+).content;
+
 //  Const Botones
 const btnVaciar = document.querySelector("#btnVaciar");
 const btnAgregar = document.querySelector("#btnAgregar");
@@ -30,7 +37,7 @@ const btnVaciarFactura = document.querySelector("#btnVaciarFactura");
 let carrito = [];
 let productos = [];
 let clientes = [];
-let factura = [];
+let facturas = [];
 
 //  Instancio modal de crear cliente
 const modal = new bootstrap.Modal(document.getElementById("CrearCliente"), {
@@ -62,6 +69,30 @@ class Carrito {
 }
 
 // Funciones
+
+// Obtener datos Json y Enviarlo al array de productos y Clientes
+const ObtenerDatos = async () => {
+  urlProductos =
+    "https://digiacomomariano.github.io/proyecto-final-js-coderhouse/json/ProductosDB.json";
+  urlClientes =
+    "https://digiacomomariano.github.io/proyecto-final-js-coderhouse/json/UsuariosDB.json";
+  try {
+    const [respuestaProducto, respuestaCliente] = await Promise.all([
+      fetch(urlProductos),
+      fetch(urlClientes),
+    ]);
+    const arrayProductos = await respuestaProducto.json();
+    const arrayClientes = await respuestaCliente.json();
+    productos = arrayProductos;
+    clientes = arrayClientes;
+
+    ClienteSelect();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Funcion para validar y crear clientes
 
 function newClient() {
   item = formCrearCliente.elements;
@@ -157,28 +188,6 @@ function renderizarCodigos() {
     codigoLista.appendChild(clone);
   });
 }
-
-// Obtener datos Json y Enviarlo al array de productos y Clientes
-const ObtenerDatos = async () => {
-  urlProductos =
-    "https://digiacomomariano.github.io/proyecto-final-js-coderhouse/json/ProductosDB.json";
-  urlClientes =
-    "https://digiacomomariano.github.io/proyecto-final-js-coderhouse/json/UsuariosDB.json";
-  try {
-    const [respuestaProducto, respuestaCliente] = await Promise.all([
-      fetch(urlProductos),
-      fetch(urlClientes),
-    ]);
-    const arrayProductos = await respuestaProducto.json();
-    const arrayClientes = await respuestaCliente.json();
-    productos = arrayProductos;
-    clientes = arrayClientes;
-
-    ClienteSelect();
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 //  Insertamos Options al Select de Clientes
 
@@ -294,7 +303,67 @@ const pintarCarrito = () => {
   });
 };
 
+// Formatear fecha
+
+function FormatearFecha() {
+  fechaActual = new Date();
+  dia = fechaActual.getDate();
+  mes = fechaActual.getMonth() + 1;
+  anio = fechaActual.getUTCFullYear();
+  fecha = `${dia}/${mes}/${anio}`;
+  return fecha;
+}
+
+// Obtener Facturas
+function ObtenerFacturas() {
+  sectionVerFactura.textContent = "";
+  if (facturas.length === 0) {
+    sectionVerFactura.textContent = "";
+    p = document.createElement("p");
+    p.classList.add("p-4");
+    p.textContent = "Lo siento, No hay facturas disponibles para Mostrar";
+    sectionVerFactura.appendChild(p);
+    return;
+  } else {
+    ListarFacturas();
+  }
+}
+
+function ListarFacturas() {
+  sectionVerFactura.textContent = "";
+  filtrarID = facturas.map((item) => item.idcliente);
+  idSinRepetir = [...new Set(filtrarID)];
+
+  idSinRepetir.forEach((name) => {
+    buscarName = clientes.find((clienteName) => clienteName.id == name);
+    identificador = buscarName.nombre + buscarName.id;
+    clone = templateListarFactura.cloneNode(true);
+    clone.querySelector(
+      "button"
+    ).textContent = `${buscarName.nombre} ${buscarName.apellido}`;
+    clone.querySelector("button").dataset.bsTarget = "#" + identificador;
+    clone.querySelector(".accordion-collapse").id = identificador;
+
+    sectionVerFactura.appendChild(clone);
+  });
+}
+
+// render factura
+
+function RenderFacturaCliente(nameid) {
+  // console.log("me diste click");
+  // const ulFactura = document.querySelector("#ulFactura");
+  // ulFactura.textContent = "";
+  // clone = templateLI.cloneNode(true);
+  // clone.querySelector("a").textContent = "nameid";
+  sectionVerFactura.querySelector("#ulFactura li a").textContent = "hola";
+}
+
 // E V E N T O S
+
+// Llamar funcion para ver facturas
+anclaFactura.addEventListener("click", ObtenerFacturas);
+
 // Renderizar Codigos al dar click en el boton
 btnCodigos.addEventListener("click", renderizarCodigos);
 
@@ -326,18 +395,26 @@ btnEnviarFactura.addEventListener("click", (e) => {
   clienteID = selectCliente.value;
   if (clienteID !== "0") {
     // Pushear Factura
-    factura.push({
+    facturas.push({
       idfactura: generarID(),
+      nrofactura: Math.random().toString().slice(12),
+      fecha: FormatearFecha(),
       idcliente: clienteID,
       detalle: carrito,
     });
     selectCliente.selectedIndex = 0;
+    //  Guardamos Factura en el localStorage
+    localStorage.setItem("factura_db", JSON.stringify(facturas));
+    // Mensaje de Confirmacion
+    Swal.fire({
+      icon: "success",
+      text: "Se registro la factura Correctamente",
+    });
+
     // Limpiamos Carrito, Reiniciamos Formulario de cliente, volvemos a renderizar carrito vacio
     carrito = [];
     formCliente.reset();
     pintarCarrito();
-    //  Guardamos Factura en el localStorage
-    localStorage.setItem("factura_db", JSON.stringify(factura));
   } else {
     Swal.fire({
       icon: "error",
